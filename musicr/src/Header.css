@@ -1,0 +1,15 @@
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    border-bottom: 1px solid #ffffff;
+}
+
+.iconos__header{
+    padding: 20px;
+}
+
+.login_button{
+    align-items: center;
+}

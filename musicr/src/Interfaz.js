@@ -2,8 +2,6 @@ import React from "react";
 import './App.css';
 import useAuth from './useAuth';
 import {useState, useEffect} from 'react'
-import useRecomendations from './useRecomendations';
-import { Routes, Route, Link } from "react-router-dom";
 import SpotifyWebApi from "spotify-web-api-node";
 import TinderCard from "react-tinder-card"
 import './Tarjetas.css'

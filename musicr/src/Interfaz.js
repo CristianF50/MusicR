@@ -28,9 +28,9 @@ function Interfaz({code}) {
         spotifyApi.setAccessToken(accessToken)
         if (recomendacion.length <= 5) {
           spotifyApi.getMySavedTracks({limit: 5, offset: 1}).then(res => {
+            console.log(res.body.items)
             res.body.items.map(track => {
                 arrSeeds.push(track.track.artists[0].id)
-                console.log(arrSeeds)
             })
               spotifyApi.getRecommendations({min_energy: 0.4, limit:100, seed_artists: arrSeeds, min_popularity: 50}).then(function(data) {
                 let recommendations = data.body;

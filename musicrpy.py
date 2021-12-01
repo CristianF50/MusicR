@@ -62,6 +62,7 @@ def musicr():
             print("La cancion ha sido descartada")
         elif op == "E":
             exit()
+        return ("La cancion que te recomendamos es: ", i.name, " by ", i.artist)
 
 if __name__ == '__main__':
     musicr()

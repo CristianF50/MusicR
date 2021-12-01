@@ -6,5 +6,5 @@ install:
   - pip install spotipy
 
 script: 
-  unittest musicrpytestintegration
-  unittest musicrpytest
+  py3 ./musicrpytestintegration.py
+  py3 ./musicrpytest.py

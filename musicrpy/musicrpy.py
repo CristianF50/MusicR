@@ -10,36 +10,57 @@ def getSemillas():
     for idx, item in enumerate(results['items']):
         track = item['track']['id']
         semillas.append(track)
-    print (semillas)
+    return semillas
 
 class cancion:
-    id = ""
-    name = ""
-    albumIMG = ""
-    preview = ""
+    def __init__(self, id , name , artist , albumIMG , preview):
+        self.id = id
+        self.name = name
+        self.artist = artist
+        self.albumIMG = albumIMG
+        self.preview = preview
 
 
 
 def getRecomendaciones(semillas):
-    results = sp.recommendations(seseed_tracks=semillas, limit=100)
+    results = sp.recommendations(seed_tracks=semillas, limit=100)
     reco = []
-    temp = cancion()
-    for idx, item in enumerate(results['items']):
-        track = item['track']['id']
-        semillas.append(track)
-    print (semillas)
+    for idx, item in enumerate(results['tracks']):
+        id = item['id']
+        name = item['name']
+        artist = item['artists'][0]['name']
+        albumIMG = item['album']['images'][0]['url']
+        preview = item['preview_url']
+        song = cancion(id,name,artist,albumIMG,preview)
+        reco.append(song)
+    return reco
 
-    
+def addToLibrary(trackID):
+    id = []
+    id.append(trackID)
+    sp.current_user_saved_tracks_add(tracks=id)
+    check = sp.current_user_saved_tracks(limit=1)
+    new = check['items'][0]['track']['id']
+    if trackID == new:
+        return 'true'
+    elif trackID != new:
+        return 'false'
 
+def musicr():
+    semillas = getSemillas()
+    recommendations = getRecomendaciones(semillas)
 
+    for i in recommendations:
+        print("La cancion que te recomendamos es: ", i.name, " by ", i.artist)
+        op = input('Deseas que la agreguemos a tu libreria ? (S/N/E para salir)')
 
-# results = sp.current_user_recently_played()
-
-#print(results['items'][0]['track'])
-
-# for idx, item in enumerate(results['items']):
-#     track = item['track']
-#     print(idx, track['artists'][0]['name'], " – ", track['name'])
+        if op == "S":
+            addToLibrary(str(i.id))
+            print("La cancion ha sido agregada")
+        elif op == "N":
+            print("La cancion ha sido descartada")
+        elif op == "E":
+            exit()
 
 if __name__ == '__main__':
-    getSemillas()
+    musicr()

@@ -23,7 +23,8 @@ class cancion:
 
 
 def getRecomendaciones(semillas):
-    results = sp.recommendations(seed_tracks=semillas, limit=100)
+    results = sp.recommendations(seed_tracks=semillas, limit=1)
+    print(results)
     reco = []
     for idx, item in enumerate(results['tracks']):
         id = item['id']

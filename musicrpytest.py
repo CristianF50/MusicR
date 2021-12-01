@@ -51,6 +51,29 @@ class test_Library(unittest.TestCase):
 
         self.assertEqual(response, ('true'))
 
+class test_Library_Fail(unittest.TestCase):
+
+    def test_Library_Fail(self):
+
+        mock_Library_patcher = patch('musicrpy.sp.current_user_saved_tracks')
+        res = {'href': '', 'items': [{'added_at': '', 'track': {'album': {'album_type': '', 'artists': [{'external_urls': {'spotify': ''}, 'href': '', 'id': '', 'name': '', 'type': 'artist', 'uri': ''}], 'available_markets': [], 'external_urls': {'spotify': ''}, 'href': '', 'id': '', 'images': [{'height': '', 'url': '', 'width': ''}, {'height': '', 'url': '', 'width': ''}, {'height': '', 'url': '', 'width': ''}], 'name': '', 'release_date': '', 'release_date_precision': '', 'total_tracks': '', 'type': '', 'uri': ''}, 'artists': [{'external_urls': {'spotify': ''}, 'href': '', 'id': '', 'name': '', 'type': '', 'uri': ''}], 'available_markets': [], 'disc_number': '', 'duration_ms': '', 'explicit': '', 'external_ids': {'isrc': ''}, 'external_urls': {'spotify': ''}, 'href': '', 'id': 'esto es una pueba debe de fallar', 'is_local': '', 'name': '', 'popularity': '', 'preview_url': '', 'track_number': '', 'type': '', 'uri': ''}}], 'limit': '', 'next': '', 'offset': '', 'previous': '', 'total': ''}
+
+        mock_Library= mock_Library_patcher.start()
+        mock_Library.return_value = res
+
+        mock_Add_patcher = patch('musicrpy.sp.current_user_saved_tracks_add')
+        res = None
+        mock_Add= mock_Add_patcher.start()
+        mock_Add.return_value = res
+
+        sp.current_user_saved_tracks_add
+
+        response = addToLibrary('debe de fallar')
+
+        mock_Library_patcher.stop()
+
+        self.assertEqual(response, ('false'))
+
 class test_Music(unittest.TestCase):
 
     def test_Music(self):

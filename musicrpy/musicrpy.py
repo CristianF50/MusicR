@@ -6,6 +6,7 @@ sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id='c176bd9d61984d3f8c4804
 
 def getSemillas():
     results = sp.current_user_saved_tracks(limit=5, offset=2)
+    print(results)
     semillas = []
     for idx, item in enumerate(results['items']):
         track = item['track']['id']

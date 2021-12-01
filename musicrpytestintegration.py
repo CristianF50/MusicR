@@ -4,9 +4,9 @@ from unittest import result, TestCase, mock
 from unittest.mock import patch 
 
 class test_Music_integracion(unittest.TestCase):
-
+    @patch('builtins.input', return_value="S")
     def test_Music1(self):
-    
+        
         mock_getReco_patcher = patch('musicrpy.getRecomendaciones')
         res2 = [cancion('7BYQUH8RD2mPoXjZEawyjy','Outsider','Blanco White','https://i.scdn.co/image/ab67616d0000b273f1e82d635519bf864c452a65%27','https://p.scdn.co/mp3-preview/78530e35146097b2ab3a9f723373fcffe2472669?cid=c176bd9d61984d3f8c4804b03245467a')]
         mock_getReco= mock_getReco_patcher.start()
@@ -84,3 +84,7 @@ class test_Music_integracion(unittest.TestCase):
     
     def test_Music6(self):
         self.assertEqual(musicr(),("La cancion que te recomendamos es: ", 'Outsider', " by ",'Blanco White'))
+
+
+if __name__ == "__main__":
+    unittest.main()

@@ -24,7 +24,6 @@ class cancion:
 
 def getRecomendaciones(semillas):
     results = sp.recommendations(seed_tracks=semillas, limit=1)
-    print(results)
     reco = []
     for idx, item in enumerate(results['tracks']):
         id = item['id']
@@ -42,6 +41,7 @@ def addToLibrary(trackID):
     sp.current_user_saved_tracks_add(tracks=id)
     check = sp.current_user_saved_tracks(limit=1)
     new = check['items'][0]['track']['id']
+    print(new)
     if trackID == new:
         return 'true'
     elif trackID != new:
